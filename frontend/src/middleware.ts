@@ -59,7 +59,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Admin routes require admin role
+  // Admin routes require admin or editor role
   if (user && pathname.startsWith('/admin')) {
     const { data: profile } = await supabase
       .from('profiles')
@@ -67,7 +67,7 @@ export async function middleware(request: NextRequest) {
       .eq('user_id', user.id)
       .single();
 
-    if (profile?.role !== 'admin') {
+    if (profile?.role !== 'admin' && profile?.role !== 'editor') {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
