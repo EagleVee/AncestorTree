@@ -1,13 +1,13 @@
 # AncestorTree
 
-> **Gia Phả Điện Tử - Họ Đặng làng Kỷ Các, Thạch Lâm, Hà Tĩnh**
+> **Gia Phả Điện Tử - Họ Nguyễn làng Yên Cát, Thạch Lâm, Hà Tĩnh**
 
 Phần mềm quản lý gia phả điện tử giúp gìn giữ và truyền thừa thông tin dòng họ qua các thế hệ.
 
 *"Gìn giữ tinh hoa - Tiếp bước cha ông"*
 
 ## Tính năng
-
+zx
 ### Core (v1.0)
 - **Cây gia phả trực quan** - Sơ đồ phả hệ tương tác, zoom, pan, collapse/expand, 10+ đời
 - **Quản lý thành viên** - Hồ sơ cá nhân chi tiết (30+ trường thông tin)

@@ -1,8 +1,7 @@
 # Supabase CLI Configuration for AncestorTree Local Development
 # Docs: https://supabase.com/docs/guides/cli/config
 
-[project]
-id = "ancestor-tree-local"
+project_id = "kpwndqjthyrpbunwetdd"
 
 [api]
 enabled = true

@@ -1,6 +1,6 @@
 # 🌳 Gia Phả Điện Tử - Frontend
 
-**Họ Đặng làng Kỷ Các**
+**Họ Nguyễn làng Yên Cát**
 
 ## 🚀 Quick Start
 

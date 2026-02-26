@@ -39,7 +39,7 @@ coverage/
 # Community posts (internal only, not for public repo)
 docs/00-foundation/06-Community/
 
-# Private family data — Họ Đặng làng Kỷ Các (seed data, admin credentials, debug scripts)
+# Private family data — Họ Nguyễn làng Yên Cát (seed data, admin credentials, debug scripts)
 # Do NOT commit — contains real names, dates, admin emails
 docs/data/
 

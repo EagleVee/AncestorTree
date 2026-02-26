@@ -47,10 +47,10 @@ import Link from 'next/link';
 // Constants
 // ═══════════════════════════════════════════════════════════════════════════
 
-const NODE_WIDTH = 120;
-const NODE_HEIGHT = 80;
-const LEVEL_HEIGHT = 140;
-const SIBLING_GAP = 20;
+const NODE_WIDTH = 180;
+const NODE_HEIGHT = 96;
+const LEVEL_HEIGHT = 160;
+const SIBLING_GAP = 24;
 const MINIMAP_WIDTH = 160;
 const MINIMAP_HEIGHT = 100;
 
@@ -112,16 +112,16 @@ function TreeNode({ node, onSelect, onToggleCollapse, isSelected }: TreeNodeProp
     >
       <foreignObject x={x} y={y} width={NODE_WIDTH} height={NODE_HEIGHT}>
         <div
-          className={`h-full bg-card border-2 ${genderColor} ${selectedRing} rounded-lg shadow-sm cursor-pointer hover:shadow-md transition-all p-2 flex flex-col items-center justify-center relative`}
+          className={`h-full w-full min-w-0 bg-card border-2 ${genderColor} ${selectedRing} rounded-lg shadow-sm cursor-pointer hover:shadow-md transition-all p-2 flex flex-col items-center justify-center relative`}
           onClick={() => onSelect(person)}
         >
-          <Avatar className="h-8 w-8 mb-1">
+          <Avatar className="h-8 w-8 mb-1 shrink-0">
             <AvatarImage src={person.avatar_url} />
             <AvatarFallback className="text-xs">
               {initials || <User className="h-3 w-3" />}
             </AvatarFallback>
           </Avatar>
-          <span className="text-xs font-medium text-center line-clamp-2 leading-tight">
+          <span className="text-xs font-medium text-center line-clamp-3 break-words leading-tight w-full min-w-0 px-0.5">
             {person.display_name}
           </span>
           {!person.is_living && (

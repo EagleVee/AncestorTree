@@ -64,8 +64,12 @@ export async function middleware(request: NextRequest) {
     user = null;
   }
 
-  // Redirect unauthenticated users from protected pages
-  if (!user && authRequiredPaths.some(path => pathname.startsWith(path))) {
+  // Redirect unauthenticated users from protected pages (skip public auth pages)
+  const isPublicPath = publicPaths.some((p) => pathname.startsWith(p));
+  const isAuthRequiredPath = authRequiredPaths.some((p) =>
+    p === '/' ? pathname === '/' : pathname.startsWith(p)
+  );
+  if (!user && !isPublicPath && isAuthRequiredPath) {
     const loginUrl = new URL('/login', request.url);
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);

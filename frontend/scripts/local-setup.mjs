@@ -93,14 +93,49 @@ if (statusResult.status !== 0) {
 
 const statusText = statusResult.stdout.toString()
 
-function extractValue(text, key) {
-  const match = text.match(new RegExp(`${key}:\\s*(.+)`))
+/** Try JSON output first (supabase status -o json) for stable parsing. */
+function tryJsonOutput() {
+  const jsonResult = spawnSync('supabase', ['status', '-o', 'json'], { cwd: ROOT, stdio: 'pipe' })
+  if (jsonResult.status !== 0) return null
+  try {
+    const data = JSON.parse(jsonResult.stdout.toString())
+    // CLI may use different key shapes (e.g. API_URL vs api_url)
+    const apiUrl = data.API_URL ?? data.api_url ?? data.project_url
+    const anonKey = data.ANON_KEY ?? data.anon_key ?? data.publishable
+    const serviceKey = data.SERVICE_ROLE_KEY ?? data.service_role_key ?? data.secret
+    if (apiUrl && anonKey) return { apiUrl, anonKey, serviceKey: serviceKey || null }
+  } catch (_) { /* ignore */ }
+  return null
+}
+
+/** Parse "key: value" lines (older CLI pretty output). */
+function extractKeyValue(text, key) {
+  const match = text.match(new RegExp(`${key}:\\s*(\\S+)`))
   return match ? match[1].trim() : null
 }
 
-const apiUrl      = extractValue(statusText, 'API URL')
-const anonKey     = extractValue(statusText, 'anon key')
-const serviceKey  = extractValue(statusText, 'service_role key')
+/** Parse table rows "│ Label │ Value │" (newer CLI pretty output). */
+function extractTableValue(text, label) {
+  const line = text.split('\n').find((l) => l.includes('│') && l.includes(label))
+  if (!line) return null
+  const parts = line.split('│').map((s) => s.trim()).filter(Boolean)
+  // parts[0] = label, parts[1] = value (two-column table)
+  const idx = parts.findIndex((p) => p.includes(label))
+  return idx >= 0 && parts[idx + 1] ? parts[idx + 1] : null
+}
+
+let apiUrl, anonKey, serviceKey
+
+const fromJson = tryJsonOutput()
+if (fromJson) {
+  apiUrl = fromJson.apiUrl
+  anonKey = fromJson.anonKey
+  serviceKey = fromJson.serviceKey
+} else {
+  apiUrl = extractKeyValue(statusText, 'API URL') ?? extractTableValue(statusText, 'Project URL')
+  anonKey = extractKeyValue(statusText, 'anon key') ?? extractTableValue(statusText, 'Publishable')
+  serviceKey = extractKeyValue(statusText, 'service_role key') ?? extractTableValue(statusText, 'Secret')
+}
 
 if (!apiUrl || !anonKey) {
   err('Could not parse supabase status output.')

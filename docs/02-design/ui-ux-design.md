@@ -297,7 +297,7 @@ MOBILE (<768px)
 ```
 ┌─────────────────────────────────────┐
 │  ┌─────┐                            │
-│  │  Đ  │  Họ Đặng làng Kỷ Các    │  ← Logo + Family name
+│  │  Đ  │  Họ Nguyễn làng Yên Cát    │  ← Logo + Family name
 │  └─────┘                            │
 ├─────────────────────────────────────┤
 │                                     │
@@ -351,7 +351,7 @@ MOBILE (<768px)
 │                                                                     │
 │                    ╔═══════════════════════════════╗                │
 │                    ║                               ║                │
-│                    ║    Họ Đặng làng Kỷ Các     ║  ← Hero        │
+│                    ║    Họ Nguyễn làng Yên Cát     ║  ← Hero        │
 │                    ║                               ║                │
 │                    ║  "Gìn giữ tinh hoa -         ║                │
 │                    ║   Tiếp bước cha ông"         ║                │
@@ -846,10 +846,10 @@ combobox có search thay vì dropdown tĩnh — hỗ trợ hàng nghìn thành v
 │  │                                                              │  │
 │  │  ╔════════════════════════════════════════════════════════╗  │  │
 │  │  ║                                                        ║  │  │
-│  │  ║  "Con cháu họ Đặng Đình phải lấy chữ Hiếu làm đầu,  ║  │  │
-│  │  ║   lấy chữ Nghĩa làm trọng, lấy chữ Học làm nền."    ║  │  │
+│  │  ║  "Con cháu họ Nguyễn phải lấy chữ Hiếu làm đầu,        ║  │  │
+│  │  ║   lấy chữ Nghĩa làm trọng, lấy chữ Học làm nền."       ║  │  │
 │  │  ║                                                        ║  │  │
-│  │  ║                     — Cụ Tổ Đặng Đình, Đời 1          ║  │  │
+│  │  ║                     — Cụ Tổ Nguyễn Quý Duy, Đời 1      ║  │  │
 │  │  ║                                                        ║  │  │
 │  │  ╚════════════════════════════════════════════════════════╝  │  │
 │  └──────────────────────────────────────────────────────────────┘  │

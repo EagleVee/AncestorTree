@@ -36,9 +36,9 @@ status: approved
 
 ## 2. Target Users
 
-### 2.1 Primary User: Họ Đặng làng Kỷ Các
+### 2.1 Primary User: Họ Nguyễn làng Yên Cát
 
-Họ Đặng làng Kỷ Các — dòng họ đầu tiên sử dụng hệ thống.
+Họ Nguyễn làng Yên Cát — dòng họ đầu tiên sử dụng hệ thống.
 
 ### 2.2 User Personas
 
