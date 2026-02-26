@@ -46,28 +46,37 @@ Phan mem quan ly gia pha dien tu giup gin giu va truyen thua thong tin dong ho q
 
 ## Quick Start
 
+### Option A: Local Development (no cloud account needed)
+
+> Requires Docker Desktop + Supabase CLI
+
 ```bash
-# Clone repo
 git clone https://github.com/Minh-Tam-Solution/AncestorTree.git
-cd AncestorTree
-
-# Install dependencies
-cd frontend && pnpm install
-
-# Setup environment
-cp .env.local.example .env.local
-# Edit .env.local with your Supabase credentials
-
-# Setup database (run in Supabase SQL Editor, in order)
-# 1. frontend/supabase/database-setup.sql      — core 7 tables
-# 2. frontend/supabase/sprint6-migration.sql   — v1.3 culture tables
-# 3. frontend/supabase/cau-duong-migration.sql — v1.4 ceremony tables
-
-# Run development server
+cd AncestorTree/frontend
+pnpm install
+pnpm local:setup   # starts Docker, runs migrations, writes .env.local
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:4000](http://localhost:4000)
+
+Demo login: `admin@giapha.local` / `admin123`
+
+See [docs/04-build/LOCAL-DEVELOPMENT.md](./docs/04-build/LOCAL-DEVELOPMENT.md) for full guide.
+
+### Option B: Supabase Cloud
+
+```bash
+git clone https://github.com/Minh-Tam-Solution/AncestorTree.git
+cd AncestorTree/frontend
+pnpm install
+cp .env.local.example .env.local
+# Fill in NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
+# Then run migrations in Supabase SQL Editor (supabase/migrations/ in order)
+pnpm dev
+```
+
+Open [http://localhost:4000](http://localhost:4000)
 
 ## Project Structure
 
@@ -145,6 +154,7 @@ v1.2.0 Release  [##########] Done - GEDCOM + Book Generator + Photos
 v1.3.0 Culture  [##########] Done - Vinh danh + Quy khuyen hoc + Huong uoc
 v1.4.0 Ceremony [##########] Done - Cau duong rotation + DFS algorithm
 v1.5.0 Relations[##########] Done - Family relations UX + tree filter by root
+v1.6.0 LocalDev [#########-] In Progress - Supabase CLI + Docker local mode
 v2.0.0 Community [----------] Future - Nha tho ho, Notifications, Cross-clan
 ```
 

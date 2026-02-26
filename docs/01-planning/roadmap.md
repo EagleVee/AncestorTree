@@ -2,7 +2,7 @@
 project: AncestorTree
 path: docs/01-planning/roadmap.md
 type: planning
-version: 1.3.0
+version: 1.4.0
 updated: 2026-02-26
 owner: "@pm"
 status: approved
@@ -220,10 +220,10 @@ status: approved
 
 **Exit Criteria:**
 
-- [ ] `pnpm local:setup` khởi chạy Docker containers + tạo `.env.local`
-- [ ] Login `admin@giapha.local` / `admin123` thành công
-- [ ] Demo family tree hiển thị đúng
-- [ ] `pnpm build` vẫn pass (cloud mode không ảnh hưởng)
+- [x] `pnpm local:setup` khởi chạy Docker containers + tạo `.env.local`
+- [x] Login `admin@giapha.local` / `admin123` thành công
+- [x] Demo family tree hiển thị đúng
+- [x] `pnpm build` vẫn pass (cloud mode không ảnh hưởng)
 
 ---
 

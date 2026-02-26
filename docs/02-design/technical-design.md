@@ -2,8 +2,8 @@
 project: AncestorTree
 path: docs/02-design/technical-design.md
 type: design
-version: 1.3.0
-updated: 2026-02-25
+version: 1.4.0
+updated: 2026-02-26
 owner: "@dev-team"
 status: approved
 ---
@@ -18,6 +18,7 @@ status: approved
 | 1.1.0   | 2026-02-25 | @pm       | Add Vinh danh, Quỹ khuyến học, Hương ước         |
 | 1.2.0   | 2026-02-25 | @architect | Update to match actual implementation (S1-S6)    |
 | 1.3.0   | 2026-02-25 | @architect | Add Cầu đương tables + DFS rotation algorithm (Sprint 7) |
+| 1.4.0   | 2026-02-26 | @architect | Add Local Development Mode — Supabase CLI + Docker (Sprint 8) |
 
 ---
 
@@ -107,16 +108,20 @@ status: approved
 
 ### 3.0 Migration Strategy
 
-> **Core tables** (people, families, children, profiles, contributions, events, media) are defined in
-> `frontend/supabase/database-setup.sql`.
+> All migration files nằm trong `frontend/supabase/migrations/` (Supabase CLI format, timestamped):
 >
-> **v1.1 tables** (achievements, fund_transactions, scholarships, clan_articles) MUST be created in a
-> separate migration file: `frontend/supabase/sprint6-migration.sql`.
+> | File | Tables |
+> |------|--------|
+> | `20260224000000_database_setup.sql` | people, families, children, profiles, contributions, events, media |
+> | `20260224000001_sprint6_migration.sql` | achievements, fund_transactions, scholarships, clan_articles |
+> | `20260224000002_cau_duong_migration.sql` | cau_duong_pools, cau_duong_assignments |
+> | `20260224000003_sprint75_migration.sql` | profiles.edit_root_person_id + is_person_in_subtree() |
+> | `20260224000004_storage_setup.sql` | Storage bucket `media` + RLS policies |
 >
-> **v1.2 tables** (cau_duong_pools, cau_duong_assignments) are in a separate file:
-> `frontend/supabase/cau-duong-migration.sql`.
+> **Cloud:** Chạy thủ công trên Supabase SQL Editor.
+> **Local:** Tự động chạy khi `supabase start` (Supabase CLI + Docker).
 >
-> See [SPRINT-PLAN.md](../04-build/SPRINT-PLAN.md) Sprint 6-7 > Migration Strategy for details.
+> See [SPRINT-PLAN.md](../04-build/SPRINT-PLAN.md) and [LOCAL-DEVELOPMENT.md](../04-build/LOCAL-DEVELOPMENT.md).
 
 ### 3.1 Entity Relationship Diagram (ERD)
 
@@ -1130,7 +1135,9 @@ export interface ChiConfig {
 
 ## 10. Deployment Architecture
 
-```
+### 10.1 Cloud Mode (Production)
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                         GITHUB                               │
 │  ┌─────────────────────────────────────────────────────┐    │
@@ -1153,12 +1160,47 @@ export interface ChiConfig {
                             │ API calls
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                        SUPABASE                              │
+│                    SUPABASE CLOUD                            │
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐        │
 │  │  Auth   │  │   DB    │  │ Storage │  │Realtime │        │
 │  └─────────┘  └─────────┘  └─────────┘  └─────────┘        │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+### 10.2 Local Mode (Development / Community) (v1.5)
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│                    LOCAL MACHINE                              │
+│                                                              │
+│  ┌──────────────────────────────────┐                        │
+│  │  Next.js Dev Server              │                        │
+│  │  http://localhost:4000           │                        │
+│  └────────────────┬─────────────────┘                        │
+│                   │ API calls (env vars)                     │
+│                   ▼                                          │
+│  ┌──────────────────────────────────┐  Docker Containers     │
+│  │  SUPABASE CLI (supabase start)  │                        │
+│  │  ┌────────┐ ┌────────┐          │                        │
+│  │  │  Auth  │ │   DB   │ :54322   │                        │
+│  │  │ GoTrue │ │ Postgres│          │                        │
+│  │  └────────┘ └────────┘          │                        │
+│  │  ┌────────┐ ┌────────┐          │                        │
+│  │  │Storage │ │ Studio │ :54323   │                        │
+│  │  └────────┘ └────────┘          │                        │
+│  │  PostgREST API    :54321        │                        │
+│  └──────────────────────────────────┘                        │
+└──────────────────────────────────────────────────────────────┘
+```
+
+**Key design:** Zero code change giữa 2 mode. Chỉ thay env vars:
+
+- Cloud: `NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co`
+- Local: `NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321`
+
+**Prerequisites:** Docker Desktop (2GB+ RAM), Node.js 18+, pnpm.
+**Setup:** `pnpm local:setup` → auto chạy migrations + seed data.
+**Chi tiết:** Xem [LOCAL-DEVELOPMENT.md](../04-build/LOCAL-DEVELOPMENT.md).
 
 ---
 

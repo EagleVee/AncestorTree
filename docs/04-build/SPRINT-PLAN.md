@@ -2,7 +2,7 @@
 project: AncestorTree
 path: docs/04-build/SPRINT-PLAN.md
 type: build
-version: 1.5.0
+version: 1.6.0
 updated: 2026-02-26
 owner: "@pm"
 status: approved
@@ -23,7 +23,7 @@ Sprint 5 ███████████████████████�
 Sprint 6 ████████████████████████████████ Week 6 (Mar 31-Apr 4) ✅ DONE
 Sprint 7 ████████████████████████████████ Week 7 (Apr 7-11)  ✅ DONE
 Sprint 7.5 ██████████████████████████████ (same day)         ✅ DONE
-Sprint 8 ████████████████████████████████ Week 8 (Apr 14-18) 🔄 IN PROGRESS
+Sprint 8 ████████████████████████████████ Week 8 (Apr 14-18) ✅ DONE
 
 Milestones:
 ├── v0.1.0 Alpha    → End Sprint 1    ✅
@@ -34,7 +34,7 @@ Milestones:
 ├── v1.3.0 Culture  → End Sprint 6    ✅
 ├── v1.4.0 CauDuong → End Sprint 7    ✅
 ├── v1.5.0 Relations→ End Sprint 7.5  ✅
-└── v1.6.0 LocalDev → End Sprint 8    🔄
+└── v1.6.0 LocalDev → End Sprint 8    ✅
 ```
 
 ---
@@ -419,8 +419,8 @@ Milestones:
 | **Sprint 6** | Culture | Honors, Fund, Scholarships, Charter | ~3,000 | ✅ |
 | **Sprint 7** | Ceremony | Cầu đương rotation + DFS algorithm | ~1,500 | ✅ |
 | **Sprint 7.5** | Relations | Family relations UX + tree filter | ~2,000 | ✅ |
-| **Sprint 8** | Local Dev | Supabase CLI + Docker, seed, setup | ~500 | 🔄 |
-| **Total** | | | **~19,000** | |
+| **Sprint 8** | Local Dev | Supabase CLI + Docker, seed, setup | ~500 | ✅ |
+| **Total** | | | **~19,000** | **DONE** |
 
 ---
 
@@ -455,7 +455,7 @@ Milestones:
 | FamilyRelationsCard | | | | | | | | ✅ | | DONE |
 | Tree hierarchical layout | | | | | | | | ✅ | | DONE |
 | Tree-scoped editor | | | | | | | | ✅ | | DONE |
-| Local dev (Supabase CLI) | | | | | | | | | 🔄 | IN PROGRESS |
+| Local dev (Supabase CLI) | | | | | | | | | ✅ | DONE |
 
 ---
 
@@ -714,7 +714,7 @@ frontend/
 
 ---
 
-## 🏃 Sprint 8: Local Development Mode 🔄
+## 🏃 Sprint 8: Local Development Mode ✅
 
 **Dates:** Feb 26, 2026
 **Goal:** Cho phép cộng đồng chạy app local mà không cần tài khoản Supabase/Vercel
@@ -734,26 +734,26 @@ Supabase CLI + Docker cho phép chạy **toàn bộ stack offline** với zero c
 
 | # | Task | Hours | Status |
 |---|------|:-----:|:------:|
-| 1 | Create `supabase/config.toml` (ports, auth, storage bucket) | 0.5h | ⏳ |
-| 2 | Move SQL files to `supabase/migrations/` (timestamped, single source of truth) | 0.5h | ⏳ |
-| 3 | Fix `handle_new_user()` trigger — add `SET search_path = public` | 0.5h | ⏳ |
-| 4 | Create `supabase/seed.sql` (demo family tree + auth users with bcrypt + auth.identities) | 1.5h | ⏳ |
-| 5 | Create `scripts/local-setup.mjs` (cross-platform Node.js setup script) | 1h | ⏳ |
-| 6 | Update `package.json` (`local:setup/start/stop/reset` scripts) | 0.25h | ⏳ |
-| 7 | Update `.env.local.example` (local-first defaults) | 0.25h | ⏳ |
-| 8 | Create `docs/04-build/LOCAL-DEVELOPMENT.md` (detailed guide) | 1h | ⏳ |
-| 9 | Update `README.md` + `CLAUDE.md` | 0.5h | ⏳ |
-| 10 | End-to-end test: `supabase start` → `pnpm dev` → login → browse | 0.5h | ⏳ |
+| 1 | Create `supabase/config.toml` (ports, auth, storage bucket) | 0.5h | ✅ |
+| 2 | Move SQL files to `supabase/migrations/` (timestamped, single source of truth) | 0.5h | ✅ |
+| 3 | Fix `handle_new_user()` trigger — add `SET search_path = public` | 0.5h | ✅ |
+| 4 | Create `supabase/seed.sql` (demo family tree + auth users with bcrypt + auth.identities) | 1.5h | ✅ |
+| 5 | Create `scripts/local-setup.mjs` (cross-platform Node.js setup script) | 1h | ✅ |
+| 6 | Update `package.json` (`local:setup/start/stop/reset` scripts) | 0.25h | ✅ |
+| 7 | Update `.env.local.example` (local-first defaults) | 0.25h | ✅ |
+| 8 | Create `docs/04-build/LOCAL-DEVELOPMENT.md` (detailed guide) | 1h | ✅ |
+| 9 | Update `README.md` + `CLAUDE.md` | 0.5h | ✅ |
+| 10 | End-to-end test: `supabase start` → `pnpm dev` → login → browse | 0.5h | ✅ |
 
 ### Acceptance Criteria
 
-- [ ] `pnpm local:setup` khởi chạy Docker containers + tạo `.env.local`
-- [ ] `pnpm dev` → login `admin@giapha.local` / `admin123` thành công
-- [ ] Cây gia phả hiển thị 15-20 thành viên demo
-- [ ] Tạo sự kiện, search thành viên, CRUD hoạt động bình thường
-- [ ] Supabase Studio (`http://localhost:54323`) truy cập được
-- [ ] `supabase db reset` xoá sạch + seed lại thành công
-- [ ] `pnpm build` vẫn pass (cloud mode không ảnh hưởng)
+- [x] `pnpm local:setup` khởi chạy Docker containers + tạo `.env.local`
+- [x] `pnpm dev` → login `admin@giapha.local` / `admin123` thành công
+- [x] Cây gia phả hiển thị 15-20 thành viên demo
+- [x] Tạo sự kiện, search thành viên, CRUD hoạt động bình thường
+- [x] Supabase Studio (`http://localhost:54323`) truy cập được
+- [x] `supabase db reset` xoá sạch + seed lại thành công
+- [x] `pnpm build` vẫn pass (cloud mode không ảnh hưởng)
 
 ### File Structure
 
@@ -781,8 +781,8 @@ frontend/
 
 ---
 
-**Status:** ✅ Sprints 1-7.5 Complete (v1.5.0) | 🔄 Sprint 8 In Progress (v1.6.0)
+**Status:** ✅ Sprints 1-8 Complete (v1.6.0)
 
-*Updated: 2026-02-26 — Added Sprint 7.5 + Sprint 8: Local Development Mode.*
+*Updated: 2026-02-26 — Sprint 8 complete: Local Development Mode (Supabase CLI + Docker).*
 
 *SDLC Framework 6.1.1 - Stage 04 Build*

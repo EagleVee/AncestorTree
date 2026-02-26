@@ -6,7 +6,11 @@
     "dev": "next dev --port 4000",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "local:setup": "node scripts/local-setup.mjs",
+    "local:start": "supabase start",
+    "local:stop": "supabase stop",
+    "local:reset": "supabase db reset"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

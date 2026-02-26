@@ -15,7 +15,7 @@ This file provides guidance to AI assistants (Claude, GPT, etc.) when working wi
 **AncestorTree** (Gia Pha Dien Tu) is a digital family tree management system for Chi toc Dang Dinh, Thach Lam, Ha Tinh.
 
 - **Repository:** https://github.com/Minh-Tam-Solution/AncestorTree
-- **Current Version:** v1.5.0 (Sprint 7.5 complete)
+- **Current Version:** v1.6.0 (Sprint 8 in progress)
 - **SDLC Tier:** LITE (5 stages)
 - **Tech Stack:** Next.js 16, React 19, Tailwind CSS 4, Supabase
 - **Built with:** [TinySDLC](https://github.com/Minh-Tam-Solution/tinysdlc) + [MTS-SDLC-Lite](https://github.com/Minh-Tam-Solution/MTS-SDLC-Lite)
@@ -161,7 +161,15 @@ pnpm test             # Run tests (when configured)
 
 # Type checking
 pnpm tsc --noEmit     # TypeScript check
+
+# Local development (Supabase CLI + Docker)
+pnpm local:setup      # Full setup: start Docker + write .env.local
+pnpm local:start      # Start containers (after first setup)
+pnpm local:stop       # Stop containers (keep data)
+pnpm local:reset      # Reset DB + re-seed demo data
 ```
+
+See `docs/04-build/LOCAL-DEVELOPMENT.md` for full local dev guide.
 
 ## Coding Conventions
 

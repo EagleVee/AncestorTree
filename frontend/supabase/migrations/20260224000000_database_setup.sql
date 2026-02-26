@@ -306,7 +306,7 @@ CREATE POLICY "Admins can update contributions" ON contributions
 CREATE OR REPLACE FUNCTION handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO profiles (user_id, email, full_name, role)
+    INSERT INTO public.profiles (user_id, email, full_name, role)
     VALUES (
         NEW.id,
         NEW.email,
@@ -315,7 +315,7 @@ BEGIN
     );
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
